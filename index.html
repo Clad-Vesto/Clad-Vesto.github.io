@@ -6,7 +6,203 @@
 
     <a href="https://clad-vesto.github.io/AlbionSoloScorecard/">Unofficial Albion Online Solo Scorecard</a>
     <div>
-        <iframe src="https://clad-vesto.github.io/AlbionSoloScorecard/" title="Albion Solo Scorecard" name="_self"></iframe>
+        <iframe width="910px" height="475px" srcdoc='<!DOCTYPE html>
+            <html lang="en">
+            <meta charset="UTF-8">
+            <title>The Unofficial Albion Online Solo Scoreboard</title>
+            <meta name="viewport" content="width=device-width,initial-scale=1">
+            <link rel="stylesheet">
+            <style>
+                html{
+                    background-color: beige;
+                }
+
+                body {
+                    width: 40em;
+                }
+
+                .inner {
+                    display: grid;
+                    grid-template-columns: auto auto auto;
+                    justify-items: center;
+                }
+                .container {
+                    background-color: lightblue;
+                    display: grid;
+                    grid-template-columns: 225px 75px;
+                    grid-template-rows: 75px 75px 75px;
+                    justify-items: center;
+                    align-items: center;
+                    padding: 10px;
+                }
+                .kpi-text {
+                    text-decoration: underline;
+                    font-size: 20px;
+                }
+
+                .kpi-int {
+                    font-size: 30px;
+                }
+
+                .ratio-text {
+                    text-decoration: underline;
+                }
+                .ratio-int {
+                    font-size: 30px;
+                }
+
+                .btns {
+                    background-color: rgb(255, 208, 0);
+                    display: grid;
+                    grid-template-columns: 100px 100px 100px;
+                    padding: 10px;
+                }
+                #deadbutton {
+                    color:blueviolet;
+                    align-content: center;
+                    justify-content: center;
+                    
+                }
+                .ratio-container {
+                    background-color: green;
+                    display: grid;
+                    grid-template-columns: 250px;
+                    align-items: center;
+                    justify-items: center;
+                }
+            </style>
+            
+            <script>
+                var resourceNode = 0; // button
+                var upgradedMobs = 0; // button
+                var killedPlayers = 0; // button
+                var bankedLoot = 0; // button
+                var openWorldChests = 0; // button
+                var escapedGank = 0; // button
+                var deathCount = 0; // button
+                var mightProgression = 0; // Starting Might vs Ending Might, user entered
+                var factionPoints = 0; // Starting FP vs Ending FP, user entered
+                var totalAchievements = 0;
+                var kpiDeathRatio // Calculated from total achievements divided by deaths
+
+                function resNodeEarned() {
+                    resourceNode++
+                    totalAchievements++
+                    //console.log("Resources " + resourceNode);
+                    //console.log("Total KPI: " + totalAchievements)
+                    document.getElementById("resource-int").innerHTML = resourceNode;
+                    document.getElementById("achievements-int").innerHTML = totalAchievements;
+                    ach2deathRatio()
+                }
+
+                function upgradedMobsKilled() {
+                    upgradedMobs++
+                    totalAchievements++
+                    //console.log("Upgraded Mobs: " + upgradedMobs);
+                    //console.log("Total KPI: " + totalAchievements)
+                    document.getElementById("upgradedMobs-int").innerHTML = upgradedMobs;
+                    document.getElementById("achievements-int").innerHTML = totalAchievements;
+                    ach2deathRatio()
+                }
+                function playerKill() {
+                    killedPlayers++
+                    totalAchievements++
+                    //console.log("Players Killed: " + killedPlayers);
+                    //console.log("Total KPI: " + totalAchievements)
+                    document.getElementById("pk-int").innerHTML = killedPlayers;
+                    document.getElementById("achievements-int").innerHTML = totalAchievements;
+                    ach2deathRatio()
+                }
+                function bankLoot() {
+                    bankedLoot++
+                    totalAchievements++
+                    //console.log("Upgraded Mobs: " + upgradedMobs);
+                    //console.log("Total KPI:  " + totalAchievements)
+                    document.getElementById("lootbank-int").innerHTML = bankedLoot;
+                    document.getElementById("achievements-int").innerHTML = totalAchievements;
+                    ach2deathRatio()
+                }
+                function worldChest() {
+                    openWorldChests++
+                    totalAchievements++
+                    //console.log("Open World Chests: " + upgradedMobs);
+                    //console.log("Total KPI:  " + totalAchievements)
+                    document.getElementById("chests-int").innerHTML = openWorldChests;
+                    document.getElementById("achievements-int").innerHTML = totalAchievements;
+                    ach2deathRatio()
+                }
+                function gankEscape() {
+                    escapedGank++
+                    totalAchievements++
+                    //console.log("Ganks Escaped: " + upgradedMobs);
+                    //console.log("Total KPI:  " + totalAchievements)
+                    document.getElementById("gankesc-int").innerHTML = escapedGank;
+                    document.getElementById("achievements-int").innerHTML = totalAchievements;
+                    ach2deathRatio()
+                }
+                function youDie() {
+                    deathCount++
+                    //console.log("Deaths: " + deathCount);
+                    document.getElementById("deaths-int").innerHTML = deathCount;
+                    ach2deathRatio()
+                }
+
+                function ach2deathRatio() {
+                    if (deathCount == 0) {
+                        document.getElementById("kpidRatio-int").innerHTML = totalAchievements;
+                        //console.log("IF IS TRUE");
+                    } else {
+                        kpiDeathRatio = totalAchievements / deathCount;
+                        kpiDeathRatio = kpiDeathRatio.toFixed(2);
+                        document.getElementById("kpidRatio-int").innerHTML = kpiDeathRatio;
+                        //console.log("IF IS FALSE");
+                    }
+
+                    //console.log(kpiDeathRatio)
+                }
+            
+            </script>
+            <body>
+                <div class="inner" target="_self">
+                    <div class="container">
+                        <div class="kpi-text" id="resource">Plentiful Resource Nodes</div>
+                        <div class="kpi-int" id="resource-int">0</div>
+                        <div class="kpi-text" id="upgradedMobs">Upgraded Mobs Killed</div>
+                        <div class="kpi-int" id="upgradedMobs-int">0</div>
+                        <div class="kpi-text" id="pk">Player Kills</div>
+                        <div class="kpi-int" id="pk-int">0</div>
+                        <div class="kpi-text" id="lootbank">Banked Loot</div>
+                        <div class="kpi-int" id="lootbank-int">0</div>
+                        <div class="kpi-text" id="chests">World Chests</div>
+                        <div class="kpi-int" id="chests-int">0</div>
+                        <div class="kpi-text" id="gankesc">Ganks Escaped</div>
+                        <div class="kpi-int" id="gankesc-int">0</div>
+                        
+                    </div>
+                    <div class="btns">
+                        <button onclick="resNodeEarned()">Resource Node</button>
+                        <button onclick="upgradedMobsKilled()">Mob Kill</button>
+                        <button onclick="playerKill()">Player Kill</button>
+                        <button onclick="bankLoot()">Banked</button>
+                        <button onclick="worldChest()">Chest</button>
+                        <button onclick="gankEscape()">Escaped</button>
+                        <div></div>
+                        <button id="deadbutton" onclick="youDie()">DEAD</button>
+                    </div>
+                    <div class="ratio-container">
+                        <h2 class="ratio-text" id="achievements">Total KPI</h2>
+                        <h2 class="ratio-int" id="achievements-int">0</h2>
+                        <h2 class="ratio-text" id="deaths">Deaths</h2>
+                        <h2 class="ratio-int" id="deaths-int">0</h2>
+                        <h2 class="ratio-text" id="kpidRatio">KPI to Death Ratio</h2>
+                        <h2 class="ratio-int" id="kpidRatio-int">0</h2>
+                    </div>
+                </div>
+            
+            </body>
+            </html>
+        
+        '></iframe>
     </div>
 </body>
 </html>
